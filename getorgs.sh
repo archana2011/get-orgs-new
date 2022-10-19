@@ -25,7 +25,7 @@ while [[ $link != ${apiendpoint}/organizations{?since} ]]
 do
         if [[ $link != ${apiendpoint}/organizations{?since} ]]
         then
-        link=$(curl -i -s -H "Accept: application/vnd.github.v3+json" -H "Authorization: token $token" -X GET "$link" | awk -F " " '/link:/ {print $2}' | tr -d "<>;")
+        link=$(curl -i -s -H "Accept: application/vnd.github.v3+json" -H "Authorization: token $token" -X GET "$link""&per_page=100" | awk -F " " '/link:/ {print $2}' | tr -d "<>;")
         echo $link >> nextorglinks
         fi
 done
